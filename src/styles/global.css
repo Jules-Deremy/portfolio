@@ -1,0 +1,202 @@
+/*
+  The CSS in this style tag is based off of Bear Blog's default CSS.
+  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
+  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
+ */
+
+:root {
+	/* Couleurs principales */
+	--accent: #0D9488;
+	--accent-dark: #0F766E;
+	--accent-light: #CCFBF1;
+ 
+	/* Neutres */
+	--bg: #F7F9F8;
+	--bg-card: #FFFFFF;
+	--black: 15, 31, 26;
+	--gray: 74, 110, 96;
+	--gray-light: 220, 234, 229;
+	--gray-dark: 30, 58, 46;
+ 
+	/* Ombres */
+	--box-shadow:
+		0 2px 6px rgba(13, 148, 136, 0.08),
+		0 8px 24px rgba(13, 148, 136, 0.10),
+		0 16px 32px rgba(13, 148, 136, 0.08);
+}
+ 
+/* ---- Typographie ---- */
+@font-face {
+	font-family: "Atkinson";
+	src: url("/fonts/atkinson-regular.woff") format("woff");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Atkinson";
+	src: url("/fonts/atkinson-bold.woff") format("woff");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+ 
+/* ---- Base ---- */
+body {
+	font-family: "Atkinson", sans-serif;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	background-color: var(--bg);
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	color: rgb(var(--gray-dark));
+	font-size: 18px;
+	line-height: 1.75;
+}
+ 
+main {
+	width: 870px;
+	max-width: calc(100% - 2em);
+	margin: auto;
+	padding: 3em 1em;
+}
+ 
+/* ---- Titres ---- */
+h1, h2, h3, h4, h5, h6 {
+	margin: 0 0 0.5rem 0;
+	color: rgb(var(--black));
+	line-height: 1.2;
+	letter-spacing: -0.02em;
+}
+h1 { font-size: 2.8em; }
+h2 { font-size: 2em; }
+h3 { font-size: 1.6em; }
+h4 { font-size: 1.3em; }
+h5 { font-size: 1.1em; }
+ 
+strong, b { font-weight: 700; }
+ 
+/* ---- Liens ---- */
+a {
+	color: var(--accent);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+a:hover {
+	color: var(--accent-dark);
+	text-decoration: underline;
+}
+ 
+/* ---- Paragraphes ---- */
+p { margin-bottom: 1em; }
+.prose p { margin-bottom: 1.8em; }
+ 
+/* ---- Médias ---- */
+img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 10px;
+}
+ 
+/* ---- Code ---- */
+code {
+	padding: 2px 7px;
+	background-color: var(--accent-light);
+	color: var(--accent-dark);
+	border-radius: 4px;
+	font-size: 0.88em;
+}
+pre {
+	padding: 1.5em;
+	border-radius: 10px;
+	background-color: rgb(var(--black));
+	overflow-x: auto;
+}
+pre > code {
+	all: unset;
+	color: #e2f8f5;
+	font-size: 0.9em;
+}
+ 
+/* ---- Blockquote ---- */
+blockquote {
+	border-left: 3px solid var(--accent);
+	padding: 0.5em 0 0.5em 1.5em;
+	margin: 1.5em 0;
+	font-size: 1.1em;
+	color: rgb(var(--gray));
+	font-style: italic;
+}
+ 
+/* ---- Séparateur ---- */
+hr {
+	border: none;
+	border-top: 1px solid rgb(var(--gray-light));
+	margin: 2em 0;
+}
+ 
+/* ---- Tableaux ---- */
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+th {
+	background-color: var(--accent-light);
+	color: var(--accent-dark);
+	padding: 0.6em 1em;
+	text-align: left;
+	font-weight: 700;
+}
+td {
+	padding: 0.6em 1em;
+	border-bottom: 1px solid rgb(var(--gray-light));
+}
+ 
+/* ---- Cards (pour projets / articles) ---- */
+.card {
+	background: var(--bg-card);
+	border-radius: 12px;
+	padding: 1.5em;
+	border: 1px solid rgb(var(--gray-light));
+	box-shadow: var(--box-shadow);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 30px rgba(13, 148, 136, 0.15);
+}
+ 
+/* ---- Tag / Badge ---- */
+.tag {
+	display: inline-block;
+	background: var(--accent-light);
+	color: var(--accent-dark);
+	font-size: 0.78em;
+	font-weight: 700;
+	padding: 3px 10px;
+	border-radius: 20px;
+	letter-spacing: 0.03em;
+}
+ 
+/* ---- Responsive ---- */
+@media (max-width: 720px) {
+	body { font-size: 16px; }
+	main { padding: 1.5em 1em; }
+	h1 { font-size: 2em; }
+	h2 { font-size: 1.6em; }
+}
+ 
+/* ---- Accessibilité ---- */
+.sr-only {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	white-space: nowrap;
+}

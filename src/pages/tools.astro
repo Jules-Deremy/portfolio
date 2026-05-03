@@ -1,0 +1,263 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title="Uses · Deremy Jules"
+      description="The tools, hardware and software I use day to day."
+    />
+    <style>
+      .page-hero {
+        padding: 4em 0 2.5em;
+      }
+      .page-hero h1 {
+        font-size: clamp(2em, 4vw, 2.8em);
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        margin-bottom: 0.5em;
+        color: rgb(var(--black));
+      }
+      .page-hero .lead {
+        font-size: 1.05em;
+        color: rgb(var(--gray));
+        max-width: 600px;
+        line-height: 1.75;
+        margin: 0;
+      }
+      .divider {
+        border: none;
+        border-top: 1px solid rgb(var(--gray-light));
+        margin: 2.5em 0;
+      }
+      .section {
+        margin-bottom: 3em;
+      }
+      .section-label {
+        font-size: 0.72em;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1.2em;
+        display: block;
+      }
+
+      /* Hardware photos */
+      .hardware-photos {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 2em;
+        max-width: 420px;
+      }
+      .hardware-photos figure {
+        margin: 0;
+      }
+      .hardware-photos img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 1px solid rgb(var(--gray-light));
+      }
+      .hardware-photos figcaption {
+        font-size: 0.78em;
+        color: rgb(var(--gray));
+        margin-top: 0.5em;
+        text-align: center;
+      }
+
+      /* Uses list */
+      .uses-list {
+        display: flex;
+        flex-direction: column;
+      }
+      .uses-item {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 1.5em;
+        padding: 1em 0;
+        border-bottom: 1px solid rgb(var(--gray-light));
+        align-items: baseline;
+      }
+      @media (max-width: 600px) {
+        .uses-item {
+          grid-template-columns: 1fr;
+          gap: 0.3em;
+        }
+      }
+      .uses-item:last-child {
+        border-bottom: none;
+      }
+      .uses-name {
+        font-size: 0.9em;
+        font-weight: 700;
+        color: rgb(var(--black));
+        letter-spacing: -0.01em;
+      }
+      .uses-desc {
+        font-size: 0.88em;
+        color: rgb(var(--gray));
+        line-height: 1.65;
+        margin: 0;
+      }
+      .wip-badge {
+        display: inline-block;
+        font-size: 0.68em;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding: 1px 7px;
+        border-radius: 20px;
+        margin-left: 6px;
+        vertical-align: middle;
+        background: #FEF3C7;
+        color: #92400E;
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+
+      <section class="page-hero">
+        <h1>Uses</h1>
+        <p class="lead">
+          The hardware, tools and software I rely on. Nothing here is sponsored,
+          just what I actually use.
+        </p>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- Hardware -->
+      <div class="section">
+        <span class="section-label">Hardware</span>
+
+        <div class="hardware-photos">
+          <figure>
+            <img src="/images/pc.png" alt="Custom gaming PC build in a Corsair Carbide Spec-Delta case" />
+            <figcaption>Custom PC build · Corsair Carbide Spec-Delta, MSI GPU</figcaption>
+          </figure>
+        </div>
+
+        <div class="uses-list">
+          <div class="uses-item">
+            <span class="uses-name">Custom PC</span>
+            <p class="uses-desc">Built it myself. Corsair Carbide Spec-Delta case, MSI GPU. Lives for gaming. Crimson Desert, Minecraft, Valorant.</p>
+          </div>
+          <div class="uses-item">
+            <span class="uses-name">Raspberry Pi 5</span>
+            <p class="uses-desc">Up and running at home. Runs a local LLM and serves as my testbed for personal automation around the job search.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- Data stack -->
+      <div class="section">
+        <span class="section-label">Data stack</span>
+        <div class="uses-list">
+          <div class="uses-item">
+            <span class="uses-name">Adobe Analytics</span>
+            <p class="uses-desc">My main tool at Cheil. Custom segments, workspace analysis, campaign and product tracking for Samsung France.</p>
+          </div>
+          <div class="uses-item">
+            <span class="uses-name">Excel + Power Query</span>
+            <p class="uses-desc">Used daily at Cheil for cross-checking Adobe exports and feeding Report Builder into Samsung's automated reports.</p>
+          </div>
+          <div class="uses-item">
+            <span class="uses-name">Python + Jupyter</span>
+            <p class="uses-desc">My Master's project work runs here. Pandas for cleaning, Plotly for the charts I publish on Dune and in this portfolio.</p>
+          </div>
+          <div class="uses-item">
+            <span class="uses-name">SQL</span>
+            <p class="uses-desc">Used on Snowflake during my Master's exercises and on Dune for the RLC token analysis. Comfortable with joins, CTEs, window functions.</p>
+          </div>
+          <div class="uses-item">
+            <span class="uses-name">Dune Analytics</span>
+            <p class="uses-desc">Picked it up at iExec for Web3 market research. I still publish on-chain queries there to track RLC adoption.</p>
+          </div>
+          <div class="uses-item">
+            <span class="uses-name">Power BI / Tableau</span>
+            <p class="uses-desc">Built a few dashboards in my Master's. Power BI for KPI reporting, Tableau when I need faster visual exploration.</p>
+          </div>
+          <div class="uses-item">
+            <span class="uses-name">Snowflake<span class="wip-badge">Learning</span></span>
+            <p class="uses-desc">I discovered this tool during an ongoing integration project led by my manager. I decided to learn how to use it on my own, given the importance it has gained in modern data stacks.</p>
+          </div>
+          <div class="uses-item">
+            <span class="uses-name">GA4</span>
+            <p class="uses-desc">Coming from an Adobe Analytics background, I'm rebuilding my reflexes in GA4. Most analyst roles in Geneva run on it, so I want to be fluent before September.</p>
+          </div>
+          <div class="uses-item">
+            <span class="uses-name">Docker<span class="wip-badge">Learning</span></span>
+            <p class="uses-desc">Started with it in my Master's to ship reproducible Python environments. Also useful for the local LLM stack on the Pi.</p>
+          </div>
+          <div class="uses-item">
+            <span class="uses-name">Azure<span class="wip-badge">Learning</span></span>
+            <p class="uses-desc">Working through it in my Master's. The cloud side I had never touched at Cheil, and I want a real grasp of it before joining a data team.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- Dev tools -->
+      <div class="section">
+        <span class="section-label">Dev tools</span>
+        <div class="uses-list">
+          <div class="uses-item">
+            <span class="uses-name">VS Code</span>
+            <p class="uses-desc">Everything goes through here. GitHub Copilot for autocompletion, Astro extension for this site, Prettier to keep the code clean.</p>
+          </div>
+          <div class="uses-item">
+            <span class="uses-name">GitHub</span>
+            <p class="uses-desc">Version control and deployment. This portfolio is hosted on GitHub Pages and deploys automatically on every push.</p>
+          </div>
+          <div class="uses-item">
+            <span class="uses-name">n8n</span>
+            <p class="uses-desc">Workflow automation. Used it professionally at AI Sisters to automate HR document management. Powerful once you get into it.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- Productivity -->
+      <div class="section">
+        <span class="section-label">Productivity</span>
+        <div class="uses-list">
+          <div class="uses-item">
+            <span class="uses-name">GitBook</span>
+            <p class="uses-desc">Where my notes live. Clean, structured, easy to navigate. Better than Notion for documentation-style thinking.</p>
+          </div>
+          <div class="uses-item">
+            <span class="uses-name">Notion</span>
+            <p class="uses-desc">Used for CRM and prospect tracking at AI Sisters. Good for collaborative databases and project management.</p>
+          </div>
+          <div class="uses-item">
+            <span class="uses-name">Slack</span>
+            <p class="uses-desc">Communication hub for Kryptosphère, the largest student crypto association in Europe. Also used professionally.</p>
+          </div>
+          <div class="uses-item">
+            <span class="uses-name">Discord</span>
+            <p class="uses-desc">Gaming and Web3 communities. A lot of the most interesting crypto conversations happen here.</p>
+          </div>
+          <div class="uses-item">
+            <span class="uses-name">Claude</span>
+            <p class="uses-desc">Daily use for research, writing, code review, thinking through problems. Also literally helped me build this portfolio.</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+    <Footer />
+  </body>
+</html>

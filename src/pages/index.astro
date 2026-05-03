@@ -1,0 +1,506 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title="Deremy Jules · Data Analyst"
+      description="Data Analyst based near Geneva. Analytics, Web3 and privacy tech."
+    />
+    <style>
+      .hero {
+        padding: 5em 0 3em;
+      }
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.78em;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1.2em;
+      }
+      .hero-eyebrow-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--accent);
+        border-radius: 50%;
+        animation: pulse 2s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(0.8); }
+      }
+      .hero h1 {
+        font-size: clamp(2.2em, 5vw, 3.4em);
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        margin-bottom: 0.6em;
+        color: rgb(var(--black));
+      }
+      .hero h1 span {
+        color: var(--accent);
+      }
+      .hero-sub {
+        font-size: 1.05em;
+        color: rgb(var(--gray));
+        max-width: 620px;
+        line-height: 1.75;
+        margin-bottom: 2em;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0.65em 1.4em;
+        border-radius: 8px;
+        font-size: 0.92em;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: var(--accent-dark);
+        transform: translateY(-1px);
+        text-decoration: none;
+        color: #fff;
+      }
+      .btn-secondary {
+        background: transparent;
+        color: var(--accent);
+        border: 1.5px solid var(--accent);
+      }
+      .btn-secondary:hover {
+        background: var(--accent-light);
+        transform: translateY(-1px);
+        text-decoration: none;
+      }
+      .divider {
+        border: none;
+        border-top: 1px solid rgb(var(--gray-light));
+        margin: 3em 0;
+      }
+      .about-strip {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2em;
+        margin-bottom: 3em;
+      }
+      @media (max-width: 600px) {
+        .about-strip { grid-template-columns: 1fr; }
+      }
+      .about-block h2 {
+        font-size: 0.72em;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.8em;
+      }
+      .about-block p {
+        font-size: 0.95em;
+        color: rgb(var(--gray));
+        line-height: 1.75;
+        margin: 0;
+      }
+      .skills-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 3em;
+      }
+      .skill-tag {
+        display: inline-block;
+        background: var(--accent-light);
+        color: var(--accent-dark);
+        font-size: 0.76em;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 20px;
+        letter-spacing: 0.03em;
+      }
+      .section-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 1.4em;
+      }
+      .section-header h2 {
+        font-size: 1.1em;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: rgb(var(--black));
+        margin: 0;
+      }
+      .section-header a {
+        font-size: 0.82em;
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .section-header a:hover { text-decoration: underline; }
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 16px;
+        margin-bottom: 3em;
+      }
+      .project-card {
+        background: var(--bg-card);
+        border: 1px solid rgb(var(--gray-light));
+        border-radius: 12px;
+        padding: 1.4em;
+        text-decoration: none;
+        display: block;
+        transition: all 0.2s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .project-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 3px; height: 100%;
+        background: var(--accent);
+        transform: scaleY(0);
+        transform-origin: bottom;
+        transition: transform 0.2s ease;
+      }
+      .project-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--box-shadow);
+        text-decoration: none;
+        border-color: var(--accent-light);
+      }
+      .project-card:hover::before {
+        transform: scaleY(1);
+      }
+      .project-card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.8em;
+      }
+      .project-badge {
+        font-size: 0.7em;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: var(--accent-light);
+        padding: 2px 9px;
+        border-radius: 20px;
+      }
+      .project-arrow {
+        font-size: 1em;
+        color: rgb(var(--gray));
+        transition: transform 0.2s;
+      }
+      .project-card:hover .project-arrow {
+        transform: translate(2px, -2px);
+      }
+      .project-card h3 {
+        font-size: 1em;
+        font-weight: 700;
+        color: rgb(var(--black));
+        margin: 0 0 0.4em;
+        letter-spacing: -0.01em;
+      }
+      .project-card p {
+        font-size: 0.88em;
+        color: rgb(var(--gray));
+        margin: 0;
+        line-height: 1.6;
+      }
+
+      /* CV block */
+      .cv-block {
+        background: var(--bg-card);
+        border: 1px solid rgb(var(--gray-light));
+        border-radius: 12px;
+        padding: 1.6em 1.8em;
+        margin-bottom: 3em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1em;
+      }
+      .cv-block-text h2 {
+        font-size: 0.72em;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin: 0 0 0.4em;
+      }
+      .cv-block-text p {
+        font-size: 0.92em;
+        color: rgb(var(--gray));
+        margin: 0;
+        line-height: 1.6;
+        max-width: 460px;
+      }
+
+      /* CV Modal */
+      .cv-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 31, 26, 0.65);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 2em 1em;
+        backdrop-filter: blur(4px);
+      }
+      .cv-modal.is-open {
+        display: flex;
+      }
+      .cv-modal-content {
+        background: var(--bg-card);
+        border-radius: 12px;
+        width: 100%;
+        max-width: 900px;
+        height: 90vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: var(--box-shadow);
+      }
+      .cv-modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1em 1.4em;
+        border-bottom: 1px solid rgb(var(--gray-light));
+        flex-wrap: wrap;
+        gap: 0.8em;
+      }
+      .cv-modal-header h3 {
+        font-size: 1em;
+        font-weight: 700;
+        color: rgb(var(--black));
+        margin: 0;
+      }
+      .cv-modal-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .cv-modal-close {
+        background: transparent;
+        border: none;
+        font-size: 1.4em;
+        line-height: 1;
+        color: rgb(var(--gray));
+        cursor: pointer;
+        padding: 4px 10px;
+        border-radius: 6px;
+        transition: all 0.15s ease;
+      }
+      .cv-modal-close:hover {
+        background: rgb(var(--gray-light));
+        color: rgb(var(--black));
+      }
+      .cv-modal-body {
+        flex: 1;
+        background: rgb(var(--gray-light));
+        overflow: hidden;
+      }
+      .cv-modal-body iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+      }
+      .btn-sm {
+        padding: 0.45em 1em;
+        font-size: 0.82em;
+      }
+
+      .contact {
+        text-align: center;
+        padding: 2em 0 1em;
+      }
+      .contact p {
+        color: rgb(var(--gray));
+        font-size: 0.95em;
+        margin-bottom: 1.2em;
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+
+      <section class="hero">
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-dot"></span>
+          Open to opportunities · Geneva area
+        </div>
+        <h1>
+          Hi, I'm Jules.<br />
+          Data analyst with a<br />
+          <span>builder mindset.</span>
+        </h1>
+        <p class="hero-sub">
+          I work at the intersection of analytics, Web3 and privacy tech.
+          I came from a business background, found my way into data, and I've been
+          building things ever since.
+        </p>
+        <div class="hero-actions">
+          <a href="/projects" class="btn btn-primary">View my work</a>
+          <a href="/about" class="btn btn-secondary">About me</a>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <div class="about-strip">
+        <div class="about-block">
+          <h2>Background</h2>
+          <p>
+            I began by studying luxury and fashion marketing, then shifted my focus to entrepreneurship, 
+            and finally decided to broaden my horizons by completing my bachelor’s degree in international business. 
+            I decided to complete my studies by specializing in data and technology during an internship at iExec. 
+            I am currently finishing my Master’s in Data Science at INSEEC MSc Paris and will be 
+            available starting in September 2026.
+          </p>
+        </div>
+        <div class="about-block">
+          <h2>What I bring</h2>
+          <p>
+            Two years managing analytics for Samsung at Cheil France, handling dashboards, 
+            real-time launch tracking and 100+ tag audits on Adobe Launch. At AI Sisters, 
+            I led GenAI B2B training cycles and deployed an n8n automation workflow. At iExec, 
+            I ranked 3rd in a 2-day hackathon, delivering a Chrome extension from ideation to prototype. 
+            Outside of work, I co-founded Altia and run a local LLM on a Raspberry Pi 5.
+          </p>
+        </div>
+      </div>
+
+      <div class="skills-row">
+        <span class="skill-tag">Adobe Analytics</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">MPC & Privacy Tech</span>
+        <span class="skill-tag">GA4</span>
+        <span class="skill-tag">Snowflake</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">n8n</span>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section-header">
+        <h2>Selected projects</h2>
+        <a href="/projects">All projects</a>
+      </div>
+      <div class="projects-grid">
+
+        <a href="/projects/altia" class="project-card">
+          <div class="project-card-top">
+            <span class="project-badge">Web3 · Product</span>
+            <span class="project-arrow">↗</span>
+          </div>
+          <h3>Altia Wallet</h3>
+          <p>
+            A new kind of crypto wallet that combines custodial UX with real
+            self-custody, built on iExec DataProtector and MPC key splitting.
+          </p>
+        </a>
+
+        <a href="/projects/web3" class="project-card">
+          <div class="project-card-top">
+            <span class="project-badge">On-chain · Research · Python · SQL</span>
+            <span class="project-arrow">↗</span>
+          </div>
+          <h3>RLC Token · On-Chain Analysis</h3>
+          <p>
+            Measuring iExec protocol adoption through on-chain data,
+            using Dune Analytics, Pandas and Plotly.
+          </p>
+        </a>
+
+      </div>
+
+      <hr class="divider" />
+
+      <div class="cv-block">
+        <div class="cv-block-text">
+          <h2>Resume</h2>
+          <p>The full version of my background, in one PDF. Open it in a quick preview or grab a copy.</p>
+        </div>
+        <button type="button" class="btn btn-primary" id="cv-open-btn">View my CV</button>
+      </div>
+
+      <div class="contact">
+        <p>Want to work together or just talk data?</p>
+        <a href="mailto:jules.deremy0@gmail.com" class="btn btn-primary">Get in touch</a>
+      </div>
+
+    </main>
+
+    <!-- CV Modal -->
+    <div class="cv-modal" id="cv-modal" role="dialog" aria-modal="true" aria-labelledby="cv-modal-title">
+      <div class="cv-modal-content">
+        <div class="cv-modal-header">
+          <h3 id="cv-modal-title">CV · Deremy Jules</h3>
+          <div class="cv-modal-actions">
+            <a href="/cv.pdf" download="CV-Deremy-Jules.pdf" class="btn btn-primary btn-sm">Download CV</a>
+            <button type="button" class="cv-modal-close" id="cv-close-btn" aria-label="Close">×</button>
+          </div>
+        </div>
+        <div class="cv-modal-body">
+          <iframe src="/cv.pdf#view=FitH" title="CV Deremy Jules" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <script is:inline>
+      (function () {
+        var modal = document.getElementById('cv-modal');
+        var openBtn = document.getElementById('cv-open-btn');
+        var closeBtn = document.getElementById('cv-close-btn');
+        if (!modal || !openBtn || !closeBtn) return;
+
+        function open() {
+          modal.classList.add('is-open');
+          document.body.style.overflow = 'hidden';
+        }
+        function close() {
+          modal.classList.remove('is-open');
+          document.body.style.overflow = '';
+        }
+        openBtn.addEventListener('click', open);
+        closeBtn.addEventListener('click', close);
+        modal.addEventListener('click', function (e) {
+          if (e.target === modal) close();
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && modal.classList.contains('is-open')) close();
+        });
+      })();
+    </script>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,234 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title="Projects · Deremy Jules"
+      description="A selection of projects in analytics, Web3 and data."
+    />
+    <style>
+      .page-hero {
+        padding: 4em 0 2.5em;
+      }
+      .page-hero h1 {
+        font-size: clamp(2em, 4vw, 2.8em);
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        margin-bottom: 0.5em;
+        color: rgb(var(--black));
+      }
+      .page-hero .lead {
+        font-size: 1.05em;
+        color: rgb(var(--gray));
+        max-width: 600px;
+        line-height: 1.75;
+        margin: 0;
+      }
+      .divider {
+        border: none;
+        border-top: 1px solid rgb(var(--gray-light));
+        margin: 2.5em 0;
+      }
+      .projects-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 3em;
+      }
+      .project-card {
+        background: var(--bg-card);
+        border: 1px solid rgb(var(--gray-light));
+        border-radius: 12px;
+        padding: 1.6em;
+        text-decoration: none;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 1em;
+        align-items: center;
+        transition: all 0.2s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .project-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 3px; height: 100%;
+        background: var(--accent);
+        transform: scaleY(0);
+        transform-origin: bottom;
+        transition: transform 0.2s ease;
+      }
+      .project-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--box-shadow);
+        text-decoration: none;
+        border-color: var(--accent-light);
+      }
+      .project-card:hover::before {
+        transform: scaleY(1);
+      }
+      .project-tags {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 0.6em;
+      }
+      .project-tag {
+        font-size: 0.7em;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: var(--accent-light);
+        padding: 2px 9px;
+        border-radius: 20px;
+      }
+      .project-card h2 {
+        font-size: 1.05em;
+        font-weight: 700;
+        color: rgb(var(--black));
+        margin: 0 0 0.4em;
+        letter-spacing: -0.01em;
+      }
+      .project-card p {
+        font-size: 0.88em;
+        color: rgb(var(--gray));
+        margin: 0;
+        line-height: 1.6;
+      }
+      .project-arrow {
+        font-size: 1.2em;
+        color: rgb(var(--gray));
+        transition: transform 0.2s;
+        flex-shrink: 0;
+      }
+      .project-card:hover .project-arrow {
+        transform: translate(2px, -2px);
+        color: var(--accent);
+      }
+      .coming-soon {
+        background: var(--bg-card);
+        border: 1px dashed rgb(var(--gray-light));
+        border-radius: 12px;
+        padding: 1.6em;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 1em;
+        align-items: center;
+        opacity: 0.6;
+      }
+      .coming-soon h2 {
+        font-size: 1.05em;
+        font-weight: 700;
+        color: rgb(var(--black));
+        margin: 0 0 0.4em;
+      }
+      .coming-soon p {
+        font-size: 0.88em;
+        color: rgb(var(--gray));
+        margin: 0;
+        line-height: 1.6;
+      }
+      .soon-badge {
+        font-size: 0.7em;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: rgb(var(--gray));
+        background: rgb(var(--gray-light));
+        padding: 2px 9px;
+        border-radius: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+
+      <section class="page-hero">
+        <h1>Projects</h1>
+        <p class="lead">
+          A mix of professional work, personal experiments and things I built
+          because I wanted to understand how they work.
+        </p>
+      </section>
+
+
+      <hr class="divider" />
+
+      <div class="projects-list">
+
+        <a href="/projects/altia" class="project-card">
+          <div>
+            <div class="project-tags">
+              <span class="project-tag">Web3</span>
+              <span class="project-tag">Product</span>
+              <span class="project-tag">Privacy</span>
+            </div>
+            <h2>Altia</h2>
+            <p>
+              A hybrid crypto wallet combining custodial UX with real non-custody, 
+              built on iExec DataProtector and MPC key splitting. 
+              Founded and pitched to international investors.
+            </p>
+          </div>
+          <span class="project-arrow">↗</span>
+        </a>
+
+        <a href="/projects/web3" class="project-card">
+          <div>
+            <div class="project-tags">
+              <span class="project-tag">On-chain</span>
+              <span class="project-tag">SQL</span>
+              <span class="project-tag">Python</span>
+            </div>
+            <h2>RLC token on-chain analysis</h2>
+            <p>
+              Measuring iExec protocol adoption through on-chain data. SQL on Dune Analytics,
+              Python analysis with Pandas and Plotly, published publicly on Dune.
+            </p>
+          </div>
+          <span class="project-arrow">↗</span>
+        </a>
+
+        <a href="/projects/ecommerce" class="project-card">
+          <div>
+            <div class="project-tags">
+              <span class="project-tag">E-Commerce</span>
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Pandas</span>
+              <span class="project-tag">Plotly</span>
+            </div>
+            <h2>E-Commerce analytics UCI online retail</h2>
+            <p>
+              End-to-end analysis of 540K transactions across 38 countries. Revenue trends,
+              product performance, customer behaviour and return rates, built with Python,
+              Pandas and Plotly.
+            </p>
+          </div>
+          <span class="project-arrow">↗</span>
+        </a>
+
+        <div class="coming-soon">
+          <div>
+            <h2>MVP Altia</h2>
+            <p>
+              The MVP of the Altia Wallet app, currently in development.
+              First working version of the hybrid custody flow we pitched.
+            </p>
+          </div>
+          <span class="soon-badge">In progress</span>
+        </div>
+
+      </div>
+
+    </main>
+    <Footer />
+  </body>
+</html>

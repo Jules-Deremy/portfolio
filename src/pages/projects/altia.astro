@@ -1,0 +1,363 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+---
+ 
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title="Altia Wallet · Deremy Jules"
+      description="A hybrid crypto wallet combining custodial UX with real non-custody, built on iExec DataProtector and MPC."
+    />
+    <style>
+      .back-link {
+        font-size: 0.85em;
+        color: var(--accent);
+        text-decoration: none;
+        margin-top: 2em;
+        display: inline-block;
+        margin-bottom: 2.5em;
+      }
+      .back-link:hover { text-decoration: underline; }
+      .project-hero { margin-bottom: 2.5em; }
+      .project-tags {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 1em;
+      }
+      .project-tag {
+        font-size: 0.7em;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: var(--accent-light);
+        padding: 2px 9px;
+        border-radius: 20px;
+      }
+      .status-tag {
+        font-size: 0.7em;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #92400E;
+        background: #FEF3C7;
+        padding: 2px 9px;
+        border-radius: 20px;
+      }
+      .project-hero h1 {
+        font-size: clamp(1.8em, 4vw, 2.6em);
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        margin-bottom: 0.6em;
+        color: rgb(var(--black));
+      }
+      .project-hero .lead {
+        font-size: 1.05em;
+        color: rgb(var(--gray));
+        max-width: 520px;
+        line-height: 1.75;
+        margin: 0;
+      }
+      .divider {
+        border: none;
+        border-top: 1px solid rgb(var(--gray-light));
+        margin: 2.5em 0;
+      }
+      .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1em;
+        margin-bottom: 2.5em;
+      }
+      .meta-item {
+        background: var(--bg-card);
+        border: 1px solid rgb(var(--gray-light));
+        border-radius: 10px;
+        padding: 1em 1.2em;
+      }
+      .meta-item span {
+        display: block;
+        font-size: 0.7em;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.4em;
+      }
+      .meta-item p {
+        font-size: 0.88em;
+        color: rgb(var(--gray-dark));
+        margin: 0;
+        font-weight: 500;
+      }
+      .section { margin-bottom: 2.5em; }
+      .section-label {
+        font-size: 0.72em;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.8em;
+        display: block;
+      }
+      .section h2 {
+        font-size: 1.3em;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.8em;
+        color: rgb(var(--black));
+      }
+      .section p {
+        font-size: 0.96em;
+        color: rgb(var(--gray));
+        line-height: 1.8;
+        margin-bottom: 1em;
+      }
+      .section p:last-child { margin-bottom: 0; }
+      .problem-box {
+        background: var(--bg-card);
+        border-left: 3px solid var(--accent);
+        border-radius: 0 10px 10px 0;
+        padding: 1.2em 1.5em;
+        margin-bottom: 2.5em;
+      }
+      .problem-box p {
+        font-size: 0.94em;
+        color: rgb(var(--gray-dark));
+        margin: 0;
+        line-height: 1.75;
+        font-style: italic;
+      }
+      .pitch-photo {
+        margin-bottom: 2.5em;
+      }
+      .pitch-photo img {
+        width: 100%;
+        max-height: 420px;
+        object-fit: cover;
+        object-position: center top;
+        border-radius: 12px;
+        border: 1px solid rgb(var(--gray-light));
+      }
+      .pitch-photo figcaption {
+        font-size: 0.8em;
+        color: rgb(var(--gray));
+        margin-top: 0.6em;
+        text-align: center;
+      }
+      .tech-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 2.5em;
+      }
+      .tech-tag {
+        display: inline-block;
+        background: var(--accent-light);
+        color: var(--accent-dark);
+        font-size: 0.78em;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 20px;
+      }
+      .learnings {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 2.5em;
+      }
+      .learning-item {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .learning-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        flex-shrink: 0;
+        margin-top: 8px;
+      }
+      .learning-item p {
+        font-size: 0.93em;
+        color: rgb(var(--gray-dark));
+        margin: 0;
+        line-height: 1.7;
+      }
+      .nav-projects {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 1em;
+        flex-wrap: wrap;
+        gap: 1em;
+      }
+      .nav-link {
+        font-size: 0.88em;
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .nav-link:hover { text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+ 
+      <a href="/projects" class="back-link">← Back to projects</a>
+ 
+      <div class="project-hero">
+        <div class="project-tags">
+          <span class="project-tag">Web3</span>
+          <span class="project-tag">Product</span>
+          <span class="project-tag">Privacy</span>
+          <span class="status-tag">MVP on hold</span>
+        </div>
+        <h1>Altia Wallet</h1>
+        <p class="lead">
+          A new kind of crypto wallet that does not force users to choose between
+          simplicity and real ownership of their assets.
+        </p>
+      </div>
+ 
+      <div class="meta-grid">
+        <div class="meta-item">
+          <span>Type</span>
+          <p>Personal project</p>
+        </div>
+        <div class="meta-item">
+          <span>Role</span>
+          <p>Founder</p>
+        </div>
+        <div class="meta-item">
+          <span>Status</span>
+          <p>Resuming after graduation</p>
+        </div>
+        <div class="meta-item">
+          <span>Stack</span>
+          <p>iExec, MPC, Docker, SGX</p>
+        </div>
+      </div>
+ 
+      <hr class="divider" />
+ 
+      <div class="section">
+        <span class="section-label">The problem</span>
+        <h2>Why crypto wallets are broken</h2>
+        <p>
+          There are two kinds of crypto wallets today and both have serious problems.
+          Custodial wallets like Binance or Bitget are easy to use, you can recover your account
+          and there is no seed phrase to manage, but you do not actually own your crypto.
+          The exchange does. Events like the FTX collapse showed exactly what that means in practice.
+        </p>
+        <p>
+          Non-custodial wallets like MetaMask or Phantom give you real ownership, but the UX
+          is painful. Lose your seed phrase and your funds are gone, permanently. No recovery.
+          For most people, that tradeoff is too much.
+        </p>
+      </div>
+ 
+      <div class="problem-box">
+        <p>
+          The average person wants to own their crypto without needing to understand
+          what a private key is. That gap is what Altia is built to close.
+        </p>
+      </div>
+ 
+      <div class="section">
+        <span class="section-label">The solution</span>
+        <h2>What Altia does differently</h2>
+        <p>
+          Altia is a hybrid wallet. The experience feels like a custodial product:
+          simple onboarding, account recovery, no seed phrase anxiety. But under the hood,
+          the user has full and exclusive ownership of their assets.
+        </p>
+        <p>
+          We use iExec DataProtector to store sensitive data inside decentralised confidential
+          computing enclaves. Only the user can access their own enclave. No third party,
+          including us, can touch it.
+        </p>
+        <p>
+          On top of that, we apply MPC (Multi-Party Computation) to split the private key
+          into multiple fragments stored across separate enclaves. If one enclave is ever
+          compromised, the attacker gets an unusable fragment. The user is protected by design,
+          not by trust.
+        </p>
+      </div>
+ 
+      <div class="section">
+        <span class="section-label">Tech stack</span>
+        <h2>What we built it with</h2>
+      </div>
+ 
+      <div class="tech-list">
+        <span class="tech-tag">iExec DataProtector</span>
+        <span class="tech-tag">MPC key splitting</span>
+        <span class="tech-tag">Confidential computing</span>
+        <span class="tech-tag">Decentralised enclaves</span>
+      </div>
+ 
+      <hr class="divider" />
+ 
+      <div class="section">
+        <span class="section-label">The pitch</span>
+        <h2>We presented it to investors</h2>
+        <p>
+          We pitched Altia in front of international investors at a Kryptosphère event in Paris.
+          Getting from idea to live pitch in a few months, with real people asking real questions
+          about the technology, was one of the most valuable experiences of my studies.
+        </p>
+      </div>
+ 
+      <figure class="pitch-photo">
+        <img src="/images/Withbro.jpg" alt="Deremy and Pierre-Felix after the Altia pitch in Paris" />
+        <figcaption>With Pierre-Felix after the pitch, Paris.</figcaption>
+      </figure>
+ 
+      <div class="section">
+        <span class="section-label">Where it stands</span>
+        <h2>Honest status</h2>
+        <p>
+          The MVP is on hold while I finish my Master's. The concept is validated,
+          the technical architecture is defined and the pitch is done. We plan to pick it
+          back up after graduation. It is a project I genuinely believe in and intend to see through.
+        </p>
+      </div>
+ 
+      <hr class="divider" />
+ 
+      <div class="section">
+        <span class="section-label">What I learned</span>
+        <h2>Key takeaways</h2>
+      </div>
+ 
+      <div class="learnings">
+        <div class="learning-item">
+          <div class="learning-dot"></div>
+          <p>Presenting a technical product to non-technical investors forces you to understand it deeply enough to strip away all the jargon. That process taught me more than any documentation.</p>
+        </div>
+        <div class="learning-item">
+          <div class="learning-dot"></div>
+          <p>Privacy infrastructure is hard to communicate. The technology is solid but users do not care about enclaves, they care about whether their money is safe. Framing matters as much as the tech.</p>
+        </div>
+        <div class="learning-item">
+          <div class="learning-dot"></div>
+          <p>Building a product from idea to pitch taught me to think about user problems before solutions, a habit that carried directly into how I approach analytics work.</p>
+        </div>
+      </div>
+ 
+      <hr class="divider" />
+ 
+      <div class="nav-projects">
+        <a href="/projects" class="nav-link">← All projects</a>
+        <a href="/projects/web3" class="nav-link">Next: RLC On-Chain Analysis →</a>
+      </div>
+ 
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,470 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title="RLC token · on-chain analysis Deremy Jules"
+      description="Measuring iExec protocol adoption through on-chain data. SQL queries on Dune Analytics, Python analysis with Pandas and Plotly."
+    />
+    <style>
+      .back-link {
+        font-size: 0.85em;
+        color: var(--accent);
+        text-decoration: none;
+        margin-top: 2em;
+        display: inline-block;
+        margin-bottom: 2.5em;
+      }
+      .back-link:hover { text-decoration: underline; }
+
+      .project-hero { margin-bottom: 2.5em; }
+      .project-tags {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 1em;
+      }
+      .project-tag {
+        font-size: 0.7em;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: var(--accent-light);
+        padding: 2px 9px;
+        border-radius: 20px;
+      }
+      .project-hero h1 {
+        font-size: clamp(1.8em, 4vw, 2.6em);
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        margin-bottom: 0.6em;
+        color: rgb(var(--black));
+      }
+      .project-hero .lead {
+        font-size: 1.05em;
+        color: rgb(var(--gray));
+        max-width: 620px;
+        line-height: 1.75;
+        margin: 0;
+      }
+      .divider {
+        border: none;
+        border-top: 1px solid rgb(var(--gray-light));
+        margin: 2.5em 0;
+      }
+      .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1em;
+        margin-bottom: 2.5em;
+      }
+      .meta-item {
+        background: var(--bg-card);
+        border: 1px solid rgb(var(--gray-light));
+        border-radius: 10px;
+        padding: 1em 1.2em;
+      }
+      .meta-item span {
+        display: block;
+        font-size: 0.7em;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.4em;
+      }
+      .meta-item p {
+        font-size: 0.88em;
+        color: rgb(var(--gray-dark));
+        margin: 0;
+        font-weight: 500;
+      }
+      .section { margin-bottom: 2.5em; }
+      .section-label {
+        font-size: 0.72em;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.8em;
+        display: block;
+      }
+      .section h2 {
+        font-size: 1.3em;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.8em;
+        color: rgb(var(--black));
+      }
+      .section p {
+        font-size: 0.96em;
+        color: rgb(var(--gray));
+        line-height: 1.8;
+        margin-bottom: 1em;
+      }
+      .section p:last-child { margin-bottom: 0; }
+
+      /* Stats row */
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 12px;
+        margin-bottom: 2.5em;
+      }
+      .stat-card {
+        background: var(--bg-card);
+        border: 1px solid rgb(var(--gray-light));
+        border-radius: 10px;
+        padding: 1.2em;
+        text-align: center;
+      }
+      .stat-value {
+        font-size: 1.6em;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: -0.02em;
+        display: block;
+        margin-bottom: 0.2em;
+      }
+      .stat-label {
+        font-size: 0.75em;
+        color: rgb(var(--gray));
+        line-height: 1.4;
+      }
+
+      /* Chart containers */
+      .chart-section {
+        margin-bottom: 3em;
+      }
+      .chart-section h3 {
+        font-size: 1em;
+        font-weight: 700;
+        color: rgb(var(--black));
+        margin-bottom: 0.4em;
+        letter-spacing: -0.01em;
+      }
+      .chart-section .chart-desc {
+        font-size: 0.88em;
+        color: rgb(var(--gray));
+        margin-bottom: 1em;
+        line-height: 1.6;
+      }
+      .chart-wrapper {
+        border: 1px solid rgb(var(--gray-light));
+        border-radius: 12px;
+        overflow: hidden;
+        background: white;
+      }
+      .chart-wrapper iframe {
+        width: 100%;
+        border: none;
+        display: block;
+      }
+
+      /* Dune link */
+      .dune-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--bg-card);
+        border: 1px solid rgb(var(--gray-light));
+        border-radius: 10px;
+        padding: 1em 1.4em;
+        text-decoration: none;
+        font-size: 0.9em;
+        font-weight: 700;
+        color: var(--accent);
+        transition: all 0.2s ease;
+        margin-bottom: 2.5em;
+        width: fit-content;
+      }
+      .dune-link:hover {
+        background: var(--accent-light);
+        transform: translateY(-1px);
+        text-decoration: none;
+      }
+
+      /* Tech list */
+      .tech-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 2.5em;
+      }
+      .tech-tag {
+        display: inline-block;
+        background: var(--accent-light);
+        color: var(--accent-dark);
+        font-size: 0.78em;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 20px;
+      }
+
+      /* Learnings */
+      .learnings {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 2.5em;
+      }
+      .learning-item {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .learning-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        flex-shrink: 0;
+        margin-top: 8px;
+      }
+      .learning-item p {
+        font-size: 0.93em;
+        color: rgb(var(--gray-dark));
+        margin: 0;
+        line-height: 1.7;
+      }
+
+      .nav-projects {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 1em;
+        flex-wrap: wrap;
+        gap: 1em;
+      }
+      .nav-link {
+        font-size: 0.88em;
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .nav-link:hover { text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+
+      <a href="/projects" class="back-link">← Back to projects</a>
+
+      <div class="project-hero">
+        <div class="project-tags">
+          <span class="project-tag">On-chain</span>
+          <span class="project-tag">SQL</span>
+          <span class="project-tag">Python</span>
+          <span class="project-tag">Dune Analytics</span>
+        </div>
+        <h1>RLC token: measuring protocol adoption through on-chain data</h1>
+        <p class="lead">
+          Can on-chain transfer data tell us whether a protocol is actually being used ?
+          I explored that question using iExec's RLC token, a project I know from the inside.
+        </p>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-item">
+          <span>Type</span>
+          <p>Personal project</p>
+        </div>
+        <div class="meta-item">
+          <span>Tools</span>
+          <p>Dune, Python, Plotly</p>
+        </div>
+        <div class="meta-item">
+          <span>Period</span>
+          <p>March 2025 to March 2026</p>
+        </div>
+        <div class="meta-item">
+          <span>Data</span>
+          <p>Ethereum mainnet</p>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <span class="section-label">Context</span>
+        <h2>Why iExec and why RLC</h2>
+        <p>
+          I worked at iExec as a Product Manager Junior in 2024. During that internship I spent
+          a lot of time on Dune Analytics doing market research on the Web3 ecosystem: DeFi,
+          DePIN, RWA. That is where I first learned to query on-chain data with SQL.
+        </p>
+        <p>
+          iExec's RLC token has an interesting property: every computation, data access and
+          app execution on the protocol requires RLC. This means transfer volume is not just
+          a price speculation signal, it should in theory reflect real protocol usage.
+          I wanted to test that hypothesis with actual data.
+        </p>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <span class="section-label">Key numbers</span>
+        <h2>12 months of RLC activity</h2>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <span class="stat-value">57K</span>
+          <span class="stat-label">Total transfers over 12 months</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">356M</span>
+          <span class="stat-label">RLC transferred in total</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">6.3M</span>
+          <span class="stat-label">USD traded on DEX</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">Aug 2025</span>
+          <span class="stat-label">Peak month, 10K transfers</span>
+        </div>
+      </div>
+
+      <a href="https://dune.com/jules_deremy/rlc-token-measuring-protocol-adoption-through-on-chain-data" target="_blank" class="dune-link">
+        View full dashboard on Dune →
+      </a>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <span class="section-label">Analysis</span>
+        <h2>What the data shows</h2>
+      </div>
+
+      <!-- Chart 1 -->
+      <div class="chart-section">
+        <h3>Monthly transfer activity</h3>
+        <p class="chart-desc">
+          Two distinct spikes stand out: March and August 2025. Both are driven by different
+          dynamics, which the zoomed views below explain.
+        </p>
+        <div class="chart-wrapper">
+          <iframe src="/charts/chart1_monthly_activity.html" height="420"></iframe>
+        </div>
+      </div>
+
+      <!-- Chart 2 -->
+      <div class="chart-section">
+        <h3>DEX trading activity on Uniswap</h3>
+        <p class="chart-desc">
+          April 2025 shows a high USD volume with few swaps, suggesting large institutional
+          trades rather than organic retail activity. From August onward swap count increases
+          steadily, consistent with broader market interest.
+        </p>
+        <div class="chart-wrapper">
+          <iframe src="/charts/chart2_dex_activity.html" height="420"></iframe>
+        </div>
+      </div>
+
+      <!-- Chart 3 -->
+      <div class="chart-section">
+        <h3>August 2025: Institutional spike</h3>
+        <p class="chart-desc">
+          The peak concentrates on August 27-28. On August 28, RLC was listed on Guotai Junan,
+          a major Hong Kong brokerage. This single event generated 2,932 transfers and 33M RLC
+          in volume in one day, the highest daily activity in the entire period.
+        </p>
+        <div class="chart-wrapper">
+          <iframe src="/charts/chart3_august_peak.html" height="500"></iframe>
+        </div>
+      </div>
+
+      <!-- Chart 4 -->
+      <div class="chart-section">
+        <h3>March 2025: Community activation</h3>
+        <p class="chart-desc">
+          March 2025 shows elevated activity across several days with no single identifiable
+          catalyst. The period overlaps with iExec's 2025 roadmap release and a community
+          AMA on trusted AI. This illustrates a key challenge in on-chain analysis: correlation
+          is easier to establish than causation.
+        </p>
+        <div class="chart-wrapper">
+          <iframe src="/charts/chart4_march_peak.html" height="500"></iframe>
+        </div>
+      </div>
+
+      <!-- Chart 5 -->
+      <div class="chart-section">
+        <h3>Top 10 RLC receivers</h3>
+        <p class="chart-desc">
+          The top wallet received 80M RLC across 4,620 transactions, consistent with an
+          exchange or protocol contract. The wallet with a single 10M RLC transaction suggests
+          an institutional one-off transfer.
+        </p>
+        <div class="chart-wrapper">
+          <iframe src="/charts/chart5_top_receivers.html" height="420"></iframe>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <span class="section-label">Stack</span>
+        <h2>How it was built</h2>
+      </div>
+
+      <div class="tech-list">
+        <span class="tech-tag">DuneSQL</span>
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">Pandas</span>
+        <span class="tech-tag">Plotly</span>
+        <span class="tech-tag">Dune API</span>
+        <span class="tech-tag">erc20_ethereum</span>
+        <span class="tech-tag">dex.trades</span>
+      </div>
+
+      <div class="section">
+        <p>
+          SQL queries were written directly on Dune to pull transfer data from
+          <code>erc20_ethereum.evt_Transfer</code> and DEX activity from <code>dex.trades</code>,
+          filtered on the RLC contract address. Data was fetched programmatically via the Dune API
+          into Python, cleaned with Pandas and visualised with Plotly. Charts are exported as
+          standalone HTML and embedded directly in this page.
+        </p>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <span class="section-label">What I learned</span>
+        <h2>Key takeaways</h2>
+      </div>
+
+      <div class="learnings">
+        <div class="learning-item">
+          <div class="learning-dot"></div>
+          <p>On-chain data is honest but noisy. A single institutional transfer can look like a surge in protocol adoption when it is really just a wallet reshuffle. Distinguishing signal from noise requires cross-referencing with external events.</p>
+        </div>
+        <div class="learning-item">
+          <div class="learning-dot"></div>
+          <p>The Guotai Junan listing on August 28 is one of the clearest examples of how an off-chain event produces an immediately measurable on-chain signature. The data does not lie, but it needs context to mean anything.</p>
+        </div>
+        <div class="learning-item">
+          <div class="learning-dot"></div>
+          <p>Having worked at iExec made this analysis richer. Knowing the protocol's architecture, the role of RLC in each computation, and the team's 2025 roadmap helped me interpret what the numbers were actually saying.</p>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="nav-projects">
+        <a href="/projects/altia" class="nav-link">← Altia Wallet</a>
+        <a href="/projects/ecommerce" class="nav-link">Next: E-Commerce Analytics →</a>
+      </div>
+
+    </main>
+    <Footer />
+  </body>
+</html>

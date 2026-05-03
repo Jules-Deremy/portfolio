@@ -1,0 +1,612 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title="E-commerce analytics UCI online retail Deremy Jules"
+      description="End-to-end e-commerce analysis on 540K transactions. Revenue trends, product performance, customer behaviour and return rates. Python, Pandas and Plotly."
+    />
+    <style>
+      .back-link {
+        font-size: 0.85em;
+        color: var(--accent);
+        text-decoration: none;
+        margin-top: 2em;
+        display: inline-block;
+        margin-bottom: 2.5em;
+      }
+      .back-link:hover { text-decoration: underline; }
+
+      .project-hero { margin-bottom: 2.5em; }
+      .project-tags {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 1em;
+      }
+      .project-tag {
+        font-size: 0.7em;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: var(--accent-light);
+        padding: 2px 9px;
+        border-radius: 20px;
+      }
+      .project-hero h1 {
+        font-size: clamp(1.8em, 4vw, 2.6em);
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        margin-bottom: 0.6em;
+        color: rgb(var(--black));
+      }
+      .project-hero .lead {
+        font-size: 1.05em;
+        color: rgb(var(--gray));
+        max-width: 620px;
+        line-height: 1.75;
+        margin: 0;
+      }
+      .divider {
+        border: none;
+        border-top: 1px solid rgb(var(--gray-light));
+        margin: 2.5em 0;
+      }
+      .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1em;
+        margin-bottom: 2.5em;
+      }
+      .meta-item {
+        background: var(--bg-card);
+        border: 1px solid rgb(var(--gray-light));
+        border-radius: 10px;
+        padding: 1em 1.2em;
+      }
+      .meta-item span {
+        display: block;
+        font-size: 0.7em;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.4em;
+      }
+      .meta-item p {
+        font-size: 0.88em;
+        color: rgb(var(--gray-dark));
+        margin: 0;
+        font-weight: 500;
+      }
+
+      .section { margin-bottom: 2.5em; }
+      .section-label {
+        font-size: 0.72em;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.8em;
+        display: block;
+      }
+      .section h2 {
+        font-size: 1.3em;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.8em;
+        color: rgb(var(--black));
+      }
+      .section p {
+        font-size: 0.96em;
+        color: rgb(var(--gray));
+        line-height: 1.8;
+        margin-bottom: 1em;
+      }
+      .section p:last-child { margin-bottom: 0; }
+
+      /* Stats row */
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+        gap: 12px;
+        margin-bottom: 2.5em;
+      }
+      .stat-card {
+        background: var(--bg-card);
+        border: 1px solid rgb(var(--gray-light));
+        border-radius: 10px;
+        padding: 1.2em;
+        text-align: center;
+      }
+      .stat-value {
+        font-size: 1.55em;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: -0.02em;
+        display: block;
+        margin-bottom: 0.2em;
+      }
+      .stat-label {
+        font-size: 0.75em;
+        color: rgb(var(--gray));
+        line-height: 1.4;
+      }
+
+      /* Chart containers */
+      .chart-section { margin-bottom: 3em; }
+      .chart-section h3 {
+        font-size: 1em;
+        font-weight: 700;
+        color: rgb(var(--black));
+        margin-bottom: 0.4em;
+        letter-spacing: -0.01em;
+      }
+      .chart-section .chart-desc {
+        font-size: 0.88em;
+        color: rgb(var(--gray));
+        margin-bottom: 1em;
+        line-height: 1.6;
+      }
+      .chart-wrapper {
+        border: 1px solid rgb(var(--gray-light));
+        border-radius: 12px;
+        overflow: hidden;
+        background: white;
+      }
+      .chart-wrapper iframe {
+        width: 100%;
+        border: none;
+        display: block;
+      }
+
+      /* GitHub link */
+      .gh-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--bg-card);
+        border: 1px solid rgb(var(--gray-light));
+        border-radius: 10px;
+        padding: 1em 1.4em;
+        text-decoration: none;
+        font-size: 0.9em;
+        font-weight: 700;
+        color: var(--accent);
+        transition: all 0.2s ease;
+        margin-bottom: 2.5em;
+        width: fit-content;
+      }
+      .gh-link:hover {
+        background: var(--accent-light);
+        transform: translateY(-1px);
+        text-decoration: none;
+      }
+
+      /* Tech list */
+      .tech-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 2.5em;
+      }
+      .tech-tag {
+        display: inline-block;
+        background: var(--accent-light);
+        color: var(--accent-dark);
+        font-size: 0.78em;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 20px;
+      }
+
+      /* Learnings */
+      .learnings {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 2.5em;
+      }
+      .learning-item {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .learning-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        flex-shrink: 0;
+        margin-top: 8px;
+      }
+      .learning-item p {
+        font-size: 0.93em;
+        color: rgb(var(--gray-dark));
+        margin: 0;
+        line-height: 1.7;
+      }
+
+      .nav-projects {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 1em;
+        flex-wrap: wrap;
+        gap: 1em;
+      }
+      .nav-link {
+        font-size: 0.88em;
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .nav-link:hover { text-decoration: underline; }
+
+      /* Power BI placeholder */
+      .powerbi-wrapper { min-height: 160px; }
+      .powerbi-placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 3em 2em;
+        text-align: center;
+        background: var(--bg);
+      }
+      .powerbi-icon {
+        font-size: 2rem;
+        color: var(--accent);
+        opacity: 0.5;
+      }
+      .powerbi-placeholder p {
+        font-size: 0.9em;
+        font-weight: 700;
+        color: rgb(var(--black));
+        margin: 0;
+      }
+      .powerbi-hint {
+        font-size: 0.78em;
+        color: rgb(var(--gray));
+        max-width: 380px;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+
+      <a href="/projects" class="back-link">← Back to projects</a>
+
+      <div class="project-hero">
+        <div class="project-tags">
+          <span class="project-tag">E-Commerce</span>
+          <span class="project-tag">Python</span>
+          <span class="project-tag">Pandas</span>
+          <span class="project-tag">Plotly</span>
+          <span class="project-tag">EDA</span>
+        </div>
+        <h1>E-commerce analytics: From raw transactions to business insights</h1>
+        <p class="lead">
+          540K transactions, 38 countries, 12 months of sales data.
+          A complete end-to-end analysis of a UK-based online retailer, from data cleaning
+          to revenue trends, product performance and customer behaviour.
+        </p>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-item">
+          <span>Type</span>
+          <p>Portfolio project</p>
+        </div>
+        <div class="meta-item">
+          <span>Tools</span>
+          <p>Python, Pandas, Plotly</p>
+        </div>
+        <div class="meta-item">
+          <span>Period</span>
+          <p>Dec 2010 – Dec 2011</p>
+        </div>
+        <div class="meta-item">
+          <span>Dataset</span>
+          <p>UCI Online Retail (Kaggle)</p>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <span class="section-label">Context</span>
+        <h2>Why this dataset</h2>
+        <p>
+          The UCI Online Retail dataset is a classic benchmark in e-commerce analytics:
+          541 909 transactions from a UK-based gift retailer selling across 38 countries between
+          December 2010 and December 2011. It contains every ingredient a real business analyst
+          faces: missing customer IDs, returns mixed in with sales, ambiguous stock codes and
+          a clear seasonality signal heading into Christmas.
+        </p>
+        <p>
+          My goal was to treat it exactly as I would a real assignment: define business questions
+          first, clean the data rigorously, then answer each question with a chart that communicates
+          clearly rather than just looking impressive.
+        </p>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <span class="section-label">Key numbers</span>
+        <h2>12 months of retail activity</h2>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <span class="stat-value">£10.3M</span>
+          <span class="stat-label">Gross revenue (sales only)</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">£9.6M</span>
+          <span class="stat-label">Net revenue after returns</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">19 781</span>
+          <span class="stat-label">Distinct orders</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">4 334</span>
+          <span class="stat-label">Unique customers</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">£521</span>
+          <span class="stat-label">Average basket value</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">7.0%</span>
+          <span class="stat-label">Return rate (% of revenue)</span>
+        </div>
+      </div>
+
+      <a href="https://github.com/Jules-Deremy/ecommerce-analysis" target="_blank" class="gh-link">
+        View source on GitHub →
+      </a>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <span class="section-label">Analysis</span>
+        <h2>What the data shows</h2>
+      </div>
+
+      <!-- Chart 1 -->
+      <div class="chart-section">
+        <h3>Monthly revenue: seasonality and Q4 surge</h3>
+        <p class="chart-desc">
+          Revenue is relatively stable from January to August (£510K to £740K/month), then
+          accelerates sharply from September onward, peaking at £1.46M in November 2011.
+          The Q4 build-up is textbook for a gift retailer: it starts earlier than most
+          operators expect and is over before December.
+        </p>
+        <div class="chart-wrapper">
+          <iframe src="/charts/ecommerce/01_revenue_mensuel.html" height="420" title="Revenue mensuel UCI Online Retail 2010 to 2011"></iframe>
+        </div>
+      </div>
+
+      <!-- Chart 2 -->
+      <div class="chart-section">
+        <h3>Top 10 products by revenue</h3>
+        <p class="chart-desc">
+          The top product, REGENCY CAKESTAND 3 TIER at £174K, outsells the second
+          by only £6K, suggesting a relatively flat long-tail rather than a dominant hero SKU.
+          This is useful context for pricing and inventory decisions: no single product
+          carries disproportionate risk.
+        </p>
+        <div class="chart-wrapper">
+          <iframe src="/charts/ecommerce/02_top_produits.html" height="420" title="Top 10 produits par revenue"></iframe>
+        </div>
+      </div>
+
+      <!-- Chart 3 -->
+      <div class="chart-section">
+        <h3>Top 10 markets outside the UK</h3>
+        <p class="chart-desc">
+          The Netherlands and Ireland lead international sales at £284K and £276K
+          respectively, both ahead of larger economies like Germany (£206K) and France
+          (£185K). This likely reflects B2B wholesale relationships rather than pure consumer
+          demand, which is typical for a gift-trade retailer.
+        </p>
+        <div class="chart-wrapper">
+          <iframe src="/charts/ecommerce/03_top_pays.html" height="420" title="Top 10 pays par revenue hors Royaume-Uni"></iframe>
+        </div>
+      </div>
+
+      <!-- Chart 4 -->
+      <div class="chart-section">
+        <h3>Order activity by hour and day, heatmap</h3>
+        <p class="chart-desc">
+          Orders concentrate heavily between 10am and 3pm, Monday to Thursday.
+          Friday drops off from the afternoon, and the weekend is nearly silent.
+          This is a pure B2B signal: purchasing managers place orders during working hours
+          and do not shop on weekends, which has direct implications for email campaign
+          scheduling and customer support staffing.
+        </p>
+        <div class="chart-wrapper">
+          <iframe src="/charts/ecommerce/08_heatmap_commandes.html" height="380" title="Heatmap des commandes par heure et jour de la semaine"></iframe>
+        </div>
+      </div>
+
+      <!-- Chart 5 -->
+      <div class="chart-section">
+        <h3>Basket value distribution</h3>
+        <p class="chart-desc">
+          The distribution is right-skewed: the median basket sits at £303, well below
+          the mean of £521. This gap reveals a small number of very large orders pulling the
+          average up, consistent with the wholesale profile of the customer base. The modal
+          basket is between £50 and £150, which is where most individual transactions land.
+        </p>
+        <div class="chart-wrapper">
+          <iframe src="/charts/ecommerce/05_distribution_panier.html" height="380" title="Distribution du panier moyen (P95)"></iframe>
+        </div>
+      </div>
+
+      <!-- Chart 6 -->
+      <div class="chart-section">
+        <h3>Geographic spread of revenue</h3>
+        <p class="chart-desc">
+          The UK accounts for the overwhelming majority of revenue. Beyond it,
+          European markets dominate, with isolated pockets in Australia and Japan.
+          The absence of North America and the rest of Asia is notable for a retailer
+          already serving 38 countries, a potential expansion opportunity.
+        </p>
+        <div class="chart-wrapper">
+          <iframe src="/charts/ecommerce/06_carte_geo.html" height="420" title="Répartition géographique mondiale du revenue"></iframe>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- Tableau Public Dashboard -->
+      <div class="section">
+        <span class="section-label">Dashboard</span>
+        <h2>Interactive Tableau Public dashboard</h2>
+        <p>
+          The same dataset in a fully interactive dashboard with KPI cards, monthly revenue trend,
+          top products, choropleth map and an order heatmap by hour and day of week.
+          Filterable by quarter and country.
+        </p>
+      </div>
+
+      <div class="chart-section">
+        <h3>E-commerce analytics Tableau Public</h3>
+        <p class="chart-desc">
+          Revenue, top products, geographic breakdown and return rates,
+          filterable by period and country.
+        </p>
+        <div class="chart-wrapper tableau-wrapper">
+          <!-- Remplace ce bloc par le code embed Tableau Public une fois publié -->
+          <div class='tableauPlaceholder' id='viz1777823561664' style='position: relative'>
+            <noscript>
+              <a href='#'>
+                <img alt='E-commerce analytics — UCI Online Retail' src='https://public.tableau.com/static/images/UC/UCIOnlineRetailAnalytics/Tableaudebord1/1_rss.png' style='border: none' />
+              </a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+              <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+              <param name='embed_code_version' value='3' />
+              <param name='site_root' value='' />
+              <param name='name' value='UCIOnlineRetailAnalytics/Tableaudebord1' />
+              <param name='tabs' value='no' />
+              <param name='toolbar' value='yes' />
+              <param name='static_image' value='https://public.tableau.com/static/images/UC/UCIOnlineRetailAnalytics/Tableaudebord1/1.png' />
+              <param name='animate_transition' value='yes' />
+              <param name='display_static_image' value='yes' />
+              <param name='display_spinner' value='yes' />
+              <param name='display_overlay' value='yes' />
+              <param name='display_count' value='yes' />
+              <param name='language' value='fr-FR' />
+            </object>
+          </div>
+          <script type='text/javascript'>
+            var divElement = document.getElementById('viz1777823561664');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            if (divElement.offsetWidth > 800) {
+              vizElement.style.width = '1200px';
+              vizElement.style.height = '827px';
+            } else if (divElement.offsetWidth > 500) {
+              vizElement.style.width = '1200px';
+              vizElement.style.height = '827px';
+            } else {
+              vizElement.style.width = '100%';
+              vizElement.style.height = '1927px';
+            }
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+          </script>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <span class="section-label">Stack</span>
+        <h2>How it was built</h2>
+      </div>
+
+      <div class="tech-list">
+        <span class="tech-tag">Python 3</span>
+        <span class="tech-tag">Pandas</span>
+        <span class="tech-tag">NumPy</span>
+        <span class="tech-tag">Plotly</span>
+        <span class="tech-tag">Tableau Public</span>
+        <span class="tech-tag">UCI Online Retail</span>
+        <span class="tech-tag">Kaggle</span>
+      </div>
+
+      <div class="section">
+        <p>
+          The raw CSV (541 909 rows) was loaded with <code>latin-1</code> encoding,
+          then cleaned in a single reproducible Python script: dates parsed to
+          <code>datetime</code>, returns isolated via the <code>C</code> invoice prefix
+          and negative quantities, special stock codes (postage, bank charges) excluded,
+          and a <code>Revenue</code> column derived as <code>Quantity × UnitPrice</code>.
+        </p>
+        <p>
+          Each chart is a self-contained Plotly HTML file embedded here via an iframe,
+          the same approach as the RLC project, keeping every visualisation interactive
+          without any JavaScript framework dependency on the portfolio side.
+        </p>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <span class="section-label">What I learned</span>
+        <h2>Key takeaways</h2>
+      </div>
+
+      <div class="learnings">
+        <div class="learning-item">
+          <div class="learning-dot"></div>
+          <p>The 25% missing CustomerID rate is not random noise. It likely represents
+          walk-in or one-off buyers without accounts. Treating these rows as "anonymous"
+          rather than dropping them lets you compute accurate revenue totals while still
+          separating cohort analyses that require customer identity.</p>
+        </div>
+        <div class="learning-item">
+          <div class="learning-dot"></div>
+          <p>The heatmap was the most operationally useful chart. Revenue by month tells
+          you what happened; orders by hour and day tell you how to staff, when to send
+          emails, and when to run promotions. For a B2B retailer, targeting weekday
+          mornings is not optional, it is where the business lives.</p>
+        </div>
+        <div class="learning-item">
+          <div class="learning-dot"></div>
+          <p>The mean/median basket gap (£521 vs £303) matters more than either number alone.
+          Reporting only the mean would overstate what a typical customer spends.
+          Reporting only the median would understate the revenue contribution of large
+          wholesale accounts. Both are needed to give an honest picture.</p>
+        </div>
+        <div class="learning-item">
+          <div class="learning-dot"></div>
+          <p>A 7% return rate on revenue is lower than e-commerce benchmarks typically
+          cited for B2C fashion (20–30%), which further supports the B2B wholesale
+          interpretation of this customer base. Context changes what a number means.</p>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="nav-projects">
+        <a href="/projects/web3" class="nav-link">← RLC Token Analysis</a>
+        <a href="/projects" class="nav-link">All projects →</a>
+      </div>
+
+    </main>
+    <Footer />
+  </body>
+</html>
